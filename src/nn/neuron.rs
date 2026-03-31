@@ -1,14 +1,16 @@
+use crate::math::functions::relu;
+
 pub struct Neuron{
-    pub inweights: Vec<f32>,
-    pub inbias: f32
+    pub weights: Vec<f32>,
+    pub bias: f32
 }
 
 impl Neuron {
     pub fn forward(&self, inputs: &[f32]) -> f32{
-        elu(self.inweights.iter()
+        relu(self.weights.iter()
     .zip(inputs.iter())
     .map(|(w, x)| w * x)
-    .sum::<f32>() + self.inbias)
+    .sum::<f32>() + self.bias)
     }
 }
 
@@ -29,9 +31,9 @@ pub struct Network {
 }
 
 impl Network {
-    pub fn forward(&self, input: &[f32]) -> f32 {
-        self.layers.iter().map(|l| {
-            l.forward(input)
+    pub fn forward(&self, input: &[f32]) -> Vec<f32> {
+        self.layers.iter().fold(input.to_vec(), |acc, l| {
+            l.forward(&acc)
         })
     }
 }
@@ -39,10 +41,3 @@ impl Network {
 
 
 
-fn elu(x: f32) -> f32{
-    if x > 0.0 {
-        x
-    } else {
-        x.exp() - 1.0
-    }
-}
