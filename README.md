@@ -20,3 +20,12 @@
 ### 예정됨
 - [ ] Training loop
 - [ ] Optimizer (SGD?)
+
+---
+$$
+\begin{aligned}
+bug_n &= \left(\frac{coffee}{sleep}\right)^n + \text{Jjoon} \\
+n &\in \mathbb{N} \\
+\text{Jjoon} &= \text{Me}
+\end{aligned}
+$$
